@@ -1,6 +1,12 @@
 # -*- mode: dockerfile -*-
 FROM docker.io/silex/emacs:28.1-ci-cask
+RUN apt-get update && apt-get --assume-yes install python3-pip \
+    && python3 -m pip install --upgrade --upgrade-strategy=eager pip \
+    && python3 -m pip install 'notebook<7'
+
 COPY install-ein.el /opt/
-RUN python3 -m pip install notebook \
-    && emacs -nw --batch --eval '(load "/root/install-ein.el")'
+RUN emacs -nw --batch --eval '(load "/opt/install-ein.el")'
     
+RUN apt-get --assume-yes install tmux
+
+COPY .tmux.conf /root/
