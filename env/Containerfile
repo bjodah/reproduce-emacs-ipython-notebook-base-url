@@ -1,0 +1,6 @@
+# -*- mode: dockerfile -*-
+FROM docker.io/silex/emacs:28.1-ci-cask
+COPY install-ein.el /opt/
+RUN python3 -m pip install notebook \
+    && emacs -nw --batch --eval '(load "/root/install-ein.el")'
+    
