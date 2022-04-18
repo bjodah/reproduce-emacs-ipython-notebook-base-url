@@ -130,7 +130,7 @@
            ${PODMAN_RUN_ARGS[@]} \
            -e TERM=xterm-256color\
            -w "$PWD" \
-           --detach-keys=ctrl-\] \
+           --detach-keys=ctrl-@ \
            --security-opt seccomp=unconfined \
            --rm \
            --name "$NAME" \

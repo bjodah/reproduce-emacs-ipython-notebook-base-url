@@ -44,6 +44,8 @@ chmod +x launch-emacs.sh
 
 pod-run \
     --container-folder . \
+    -e LC_ALL=en_US.UTF-8 \
+    -e LANG=en_US.UTF-8 \
     "$@" \
     -- tmux -2 -S tmux.sock new -s session \
     "./launch-notebook.sh \; split-window -v ./launch-emacs.sh"
