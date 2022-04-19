@@ -1,12 +1,17 @@
 # -*- mode: dockerfile -*-
 FROM docker.io/silex/emacs:28.1-ci-cask
-RUN apt-get update && apt-get --assume-yes install python3-pip \
+RUN apt-get update && apt-get --assume-yes install \
+    python3-pip \
+    tmux \ 
     && python3 -m pip install --upgrade --upgrade-strategy=eager pip \
-    && python3 -m pip install 'notebook<7'
+    && python3 -m pip install 'notebook<7' yq
 
 COPY install-ein.el /opt/
 RUN emacs -nw --batch --eval '(load "/opt/install-ein.el")'
-    
-RUN apt-get --assume-yes install tmux
+
+# Install ein with unrelased commits:
+RUN rm -r ~/.emacs.d/elpa/ein-*/ \
+    && git clone https://github.com/millejoh/emacs-ipython-notebook /build/ein \
+    && cd /build/ein && make install
 
 COPY .tmux.conf /root/

@@ -26,7 +26,7 @@ python3 -m notebook \
    --no-browser \
    --allow-root \
    --NotebookApp.allow_origin='*' \
-   --NotebookApp.ip="0.0.0.0" \
+   --NotebookApp.ip="127.0.0.1" \
    $NOTEBOOK_ARGS
 EOF
 chmod +x launch-notebook.sh
@@ -38,7 +38,7 @@ chmod +x launch-notebook.sh
 
 cat <<EOF>launch-emacs.sh
 #!/bin/bash
-emacs -nw --eval '(ein:notebooklist-login "http://localhost:8888/${BASE_URL}" (lambda (buf url-or-port) (switch-to-buffer buf)))'
+emacs -nw --eval '(ein:notebooklist-login "http://127.0.0.1:8888/${BASE_URL}" (lambda (buf url-or-port) (switch-to-buffer buf)))'
 EOF
 chmod +x launch-emacs.sh
 
