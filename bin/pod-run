@@ -92,12 +92,13 @@
 	# with 'storage-chown-by-maps' consuming all CPU and disk read-write.
 	#
 	# Instead pass the following to 
-	PODMAN_RUN_ARGS+=("--net host")
-    fi
-
 #          --user $UID:$GID \
 #	   -e LOGNAME \
 #          --cap-add=SYS_PTRACE \
+
+	PODMAN_RUN_ARGS+=("--net host")
+    fi
+
     set -euxo pipefail
     
     if [[ ! -z "$CONTAINER_FOLDER" ]]; then
